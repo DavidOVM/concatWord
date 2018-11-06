@@ -1,0 +1,9 @@
+
+# Optional npm cache directory
+.npm
+
+# 'npm pack'
+*.tgz
+
+# Intellij IDE project settings
+.idea
