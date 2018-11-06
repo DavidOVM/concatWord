@@ -14,6 +14,13 @@ class Node {
     }
     return childNode
   }
+  print(tab = ' ') {
+    console.log(tab, this.value, '---', this.depth, '---', this.isEndOfWord, '---')
+    const childNodeKeys = Object.keys(this.childNodes)
+    for (let i = 0; i < childNodeKeys.length; i++) {
+      this.childNodes[childNodeKeys[i]].print(tab + '  ')
+    }
+  }
 }
 
 class Tree {
@@ -28,9 +35,13 @@ class Tree {
     }
     currentNode.isEndOfWord = true
   }
+
+  print() {
+    this.rootNode.print()
+  }
 }
 
-const words = ['rat', 'catratdog', 'cat', 'dog', 'cats', 'catsrat', 'ratdog', 'e']
+const words = ['rat', 'catratdog', 'cat', 'dog', 'cats', 'catsrat', 'catsa']
 const wordLengthsMap = new Map()
 const tree = new Tree()
 let orderedLengths
@@ -44,5 +55,4 @@ words.forEach(word => {
 
 orderedLengths = [...wordLengthsMap.keys()].sort()
 
-console.log(orderedLengths)
-console.log(wordLengthsMap)
+tree.print()
