@@ -1,0 +1,20 @@
+{
+  "name": "concatword",
+  "version": "1.0.0",
+  "description": "# Concatenated Words",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidOVM/concatWord.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DavidOVM/concatWord/issues"
+  },
+  "homepage": "https://github.com/DavidOVM/concatWord#readme"
+}
