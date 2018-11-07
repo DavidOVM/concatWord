@@ -1,3 +1,5 @@
+const fs = require('fs')
+
 class Node {
   constructor (parentNode, value = null, depth, childNodes = {}, isEndOfWord = false) {
     this.parentNode = parentNode
@@ -29,11 +31,19 @@ class Tree {
   }
 
   addWord(word) {
-    let currentNode = this.rootNode
-    for (let i = 0; i < word.length; i++) {
-      currentNode = currentNode.addChild(word[i])
+    if (word && word.length) {
+      let currentNode = this.rootNode
+      for (let i = 0; i < word.length; i++) {
+        currentNode = currentNode.addChild(word[i])
+      }
+      currentNode.isEndOfWord = true
     }
-    currentNode.isEndOfWord = true
+  }
+
+  addWords(words) {
+    for (let i = 0; i < words.length; i++) {
+      this.addWord(words[i])
+    }
   }
 
   print() {
@@ -83,22 +93,44 @@ class Tree {
   }
 }
 
-const words = ["cat","cats","catsdogcats","dog","dogcatsdog","hippopotamuses","rat","ratcatdogcat"]
-const wordLengthsMap = new Map()
+let file = null
+let words = null
+try {
+  file = fs.readFileSync('src/words.txt', 'utf8')
+  words = file.split(/\r?\n/)
+} catch (e) {
+  console.log('please provide a valid file', e)
+}
+
+console.time("dbsave")
+
+// words = ["cat","cats","catsdogcats","dog","dogcatsdog","hippopotamuses","rat","ratcatdogcat", "s"]
 const tree = new Tree()
-let orderedLengths
 
-words.forEach(word => {
-  let wordArray = wordLengthsMap.get(word.length) || []
-  wordArray.push(word)
-  wordLengthsMap.set(word.length, wordArray)
-  tree.addWord(word)
-})
+tree.addWords(words)
 
-orderedLengths = [...wordLengthsMap.keys()].sort()
+let concatenatedWordCount = 0
+let maxLength = 0, secondMaxLength = 0
+let maxLengthWords = [], secondMaxLengthWords = []
+for (let i = 0; i < words.length; i++) {
+  const word = words[i]
+  if (tree.isConcatenated(word)) {
+    concatenatedWordCount++
+    if (word.length > maxLength) {
+      secondMaxLength = maxLength
+      secondMaxLengthWords = maxLengthWords
+      maxLength = word.length
+      maxLengthWords = [word]
+    } else if (word.length === maxLength) {
+      maxLengthWords.push(word)
+    } else if (word.length > secondMaxLength) {
+      secondMaxLength = word.length
+      secondMaxLengthWords = [word]
+    } else if (word.length === secondMaxLength) {
+      secondMaxLengthWords.push(word)
+    }
+  }
+}
 
-tree.print()
-
-console.log(tree.isConcatenated('catsdogcats'))
-console.log(tree.isConcatenated('dogcatsdog'))
-console.log(tree.isConcatenated('ratcatdogcathippopotamuses'))
+console.log(maxLengthWords, secondMaxLengthWords, concatenatedWordCount)
+console.timeEnd("dbsave")
