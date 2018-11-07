@@ -39,9 +39,51 @@ class Tree {
   print() {
     this.rootNode.print()
   }
+
+  isConcatenated(word) {
+    let currentNode = this.rootNode
+    let nextNode = {}
+    let lastEndOfWordNode = null
+    let index = 0
+    while (true) {
+      if (index === word.length ) {
+        if (word.length !== currentNode.depth && currentNode.isEndOfWord) {
+          return true
+        }
+        if (!lastEndOfWordNode) {
+          return false
+        }
+        index -= currentNode.depth - lastEndOfWordNode.depth
+        nextNode = this.rootNode
+        currentNode = this.rootNode
+        lastEndOfWordNode = null
+        continue
+      } else {
+        nextNode = currentNode.childNodes[word[index]]
+      }
+
+      if (!nextNode) {
+        if (!currentNode.isEndOfWord) {
+          if (!lastEndOfWordNode) {
+            return false
+          }
+          index -= currentNode.depth - lastEndOfWordNode.depth
+        }
+        nextNode = this.rootNode
+        lastEndOfWordNode = null
+      } else {
+        if (currentNode.isEndOfWord) {
+          lastEndOfWordNode = currentNode
+        }
+        ++index
+      }
+
+      currentNode = nextNode
+    }
+  }
 }
 
-const words = ['rat', 'catratdog', 'cat', 'dog', 'cats', 'catsrat', 'catsa']
+const words = ["cat","cats","catsdogcats","dog","dogcatsdog","hippopotamuses","rat","ratcatdogcat"]
 const wordLengthsMap = new Map()
 const tree = new Tree()
 let orderedLengths
@@ -56,3 +98,7 @@ words.forEach(word => {
 orderedLengths = [...wordLengthsMap.keys()].sort()
 
 tree.print()
+
+console.log(tree.isConcatenated('catsdogcats'))
+console.log(tree.isConcatenated('dogcatsdog'))
+console.log(tree.isConcatenated('ratcatdogcathippopotamuses'))
