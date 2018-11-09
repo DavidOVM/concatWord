@@ -26,8 +26,6 @@ class Tree {
   }
 
   isConcatenated(word, isOriginalWord = true) {
-    let endOfWordDepths = []
-
     for (let index = 0, currentNode = this.rootNode, nextNode = null; index < word.length; index++, currentNode = nextNode) {
       nextNode = currentNode.childNodes[word[index]]
       if (!nextNode) {
@@ -44,14 +42,8 @@ class Tree {
           else break
         }
       }
-      if (nextNode.isEndOfWord)
-        endOfWordDepths.push(nextNode.depth)
+      if (nextNode.isEndOfWord && this.isConcatenated(word.substring(nextNode.depth), false)) return true
     }
-
-    for (let index = 0; index < endOfWordDepths.length; index++) {
-      if (this.isConcatenated(word.substring(endOfWordDepths[index]), false)) return true
-    }
-
     return false
   }
 
