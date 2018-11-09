@@ -24,13 +24,13 @@ the longest concatenated word would be 'ratcatdogcat' with 12 characters. 'hippo
 
 ## Solution
 
-Latest node.js and npm required
+- Latest node.js and npm required
 
-Clone repo and run `npm start` or just `node src/main.js`. 
+- Clone repo and run `npm start` or just `node src/main.js`. 
 
-File called `words.txt` is required in /src
+- File called `words.txt` is required in /src
 
-Average Execution Time for 173k words: `340ms`
+- Average Execution Time for 173k words: `340ms` Measuring tree build and algorithm execution not file read and logs
 
 #### How does it work?
 
