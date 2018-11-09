@@ -53,6 +53,8 @@ For example, this list of words: 'ah', 'ahead', 'ead', 'ad' Will provide the fol
         |_ 'd' <- endOfWord
 ```
 
+You can use `tree.print()` for visibility (it will affect execution time)
+
 The algorithm will take a word and traverse the tree. First it will find the original word and all the endOfWords within it and then it will recursively check if the different parts of the word are concatenated.
 
 Let's take 'ahead', we would have 'ah' as the only endOfWord within our word, now we remove 'ah' from 'ahead' and apply the same algorithm to it finding 'ead' and returning true. 
