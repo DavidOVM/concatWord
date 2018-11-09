@@ -1,6 +1,6 @@
 const fs = require('fs')
 const treeAlgorithm = require('./algorithms/tree')
-const recursiveAlgorithm = require('./algorithms/recursive')
+//const recursiveAlgorithm = require('./algorithms/recursive')
 
 let file = null, words = null
 try {
