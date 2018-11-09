@@ -15,51 +15,55 @@ class Tree {
     }
   }
 
+  addWords(words) {
+    for (let i = 0; i < words.length; i++) {
+      this.addWord(words[i])
+    }
+  }
+
   print() {
     this.rootNode.print()
   }
 
-  isConcatenated(word) {
+  isConcatenated(word, isOriginalWord = true) {
     let currentNode = this.rootNode
-    let nextNode = {}
-    let lastEndOfWordNode = null
-    let index = 0
-    while (true) {
-      if (index === word.length ) {
-        if (word.length !== currentNode.depth && currentNode.isEndOfWord) {
-          return true
-        }
-        if (!lastEndOfWordNode) {
-          return false
-        }
-        index -= currentNode.depth - lastEndOfWordNode.depth
-        nextNode = this.rootNode
-        currentNode = this.rootNode
-        lastEndOfWordNode = null
-        continue
-      } else {
-        nextNode = currentNode.childNodes[word[index]]
-      }
+    let nextNode = null
+    let endOfWordDepths = []
 
+    for (let index = 0; index < word.length; index++) {
+      nextNode = currentNode.childNodes[word[index]]
       if (!nextNode) {
-        if (!currentNode.isEndOfWord) {
-          if (!lastEndOfWordNode) {
-            return false
-          }
-          index -= currentNode.depth - lastEndOfWordNode.depth
-        }
-        nextNode = this.rootNode
-        lastEndOfWordNode = null
-      } else {
         if (currentNode.isEndOfWord) {
-          lastEndOfWordNode = currentNode
+          break
         }
-        ++index
+        if (isOriginalWord) {
+          return false
+        } else {
+          break
+        }
+      } else if (isOriginalWord && nextNode.depth === word.length && !nextNode.isEndOfWord) {
+        return false
+      } else if (!isOriginalWord && nextNode.depth === word.length && !nextNode.isEndOfWord) {
+        break
+      } else if (!isOriginalWord && nextNode.isEndOfWord && nextNode.depth === word.length) {
+        return true
+      } else if (isOriginalWord && nextNode.isEndOfWord && nextNode.depth === word.length) {
+        break
+      } else if (nextNode.isEndOfWord) {
+        endOfWordDepths.push(nextNode.depth)
       }
-
       currentNode = nextNode
     }
+
+    for (let index = 0; index < endOfWordDepths.length; index++) {
+      if (this.isConcatenated(word.substring(endOfWordDepths[index]), false)) {
+        return true
+      }
+    }
+
+    return false
   }
+
 }
 
 module.exports = Tree

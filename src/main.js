@@ -5,7 +5,7 @@ const recursiveAlgorithm = require('./algorithms/recursive')
 let file = null, words = null
 try {
   file = fs.readFileSync('src/words.txt', 'utf8')
-  words = file.split(/\r?\n/).filter(Boolean).slice(0, 4000)
+  words = file.split(/\r?\n/).filter(Boolean)
 } catch (e) {
   console.log('please provide a valid file', e)
 }
