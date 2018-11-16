@@ -28,19 +28,11 @@ class Tree {
   isConcatenated(word, isOriginalWord = true) {
     for (let index = 0, currentNode = this.rootNode, nextNode = null; index < word.length; index++, currentNode = nextNode) {
       nextNode = currentNode.childNodes[word[index]]
-      if (!nextNode) {
-        if (currentNode.isEndOfWord) break
-        if (isOriginalWord) return false
-        break
-      }
+      if (!nextNode) return false
       if (nextNode.depth === word.length) {
-        if (isOriginalWord) {
-          if (nextNode.isEndOfWord) break
-          else return false
-        } else {
-          if (nextNode.isEndOfWord) return true
-          else break
-        }
+        if (isOriginalWord) return false
+        if (nextNode.isEndOfWord) return true
+        return false
       }
       if (nextNode.isEndOfWord && this.isConcatenated(word.substring(nextNode.depth), false)) return true
     }
