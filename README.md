@@ -26,11 +26,11 @@ the longest concatenated word would be 'ratcatdogcat' with 12 characters. 'hippo
 
 - Latest node.js and npm required
 
-- Clone repo and run `npm start` or just `node src/main.js`. 
+- Clone repo and run `npm start`. 
 
 - File called `words.txt` is required in /src
 
-- Average Execution Time for 173k words: `340ms` Measuring tree build and algorithm execution not file read and logs
+- Average Execution Time for 173k words: `500ms` 
 
 #### How does it work?
 
