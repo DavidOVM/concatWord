@@ -21,10 +21,6 @@ class Tree {
     }
   }
 
-  print() {
-    this.rootNode.print()
-  }
-
   isConcatenated(word, isOriginalWord = true) {
     for (let index = 0, currentNode = this.rootNode, nextNode = null; index < word.length; index++, currentNode = nextNode) {
       nextNode = currentNode.childNodes[word[index]]

@@ -14,13 +14,6 @@ class Node {
     }
     return childNode
   }
-  print(tab = ' ') {
-    console.log(tab, this.value, '---', this.depth, '---', this.isEndOfWord, '---')
-    const childNodeKeys = Object.keys(this.childNodes)
-    for (let i = 0; i < childNodeKeys.length; i++) {
-      this.childNodes[childNodeKeys[i]].print(tab + '  ')
-    }
-  }
 }
 
 module.exports = Node
