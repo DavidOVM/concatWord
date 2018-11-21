@@ -15,20 +15,27 @@ maxLengthConcatWords = []
 secondMaxLengthConcatWords = []
 
 for word in words:
+
     if tree.is_concatenated(word):
         concatenatedWordCount += 1
+
         if len(word) > maxConcatLength:
             secondMaxConcatLength = maxConcatLength
             secondMaxLengthConcatWords = maxLengthConcatWords
             maxConcatLength = len(word)
             maxLengthConcatWords = [word]
+
         elif len(word) == maxConcatLength:
             maxLengthConcatWords.append(word)
+
         elif len(word) > secondMaxConcatLength:
             secondMaxConcatLength = len(word)
             secondMaxLengthConcatWords = [word]
+
         elif len(word) == secondMaxConcatLength:
             secondMaxLengthConcatWords.append(word)
 
-print concatenatedWordCount, maxLengthConcatWords, secondMaxLengthConcatWords
+print concatenatedWordCount, \
+    maxLengthConcatWords, \
+    secondMaxLengthConcatWords
 

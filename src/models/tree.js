@@ -1,10 +1,8 @@
 const Node = require('./node')
-
 class Tree {
   constructor () {
     this.rootNode = new Node(null, 'root', 0)
   }
-
   addWord(word) {
     if (word && word.length) {
       let currentNode = this.rootNode
@@ -14,13 +12,11 @@ class Tree {
       currentNode.isEndOfWord = true
     }
   }
-
   addWords(words) {
     for (let i = 0; i < words.length; i++) {
       this.addWord(words[i])
     }
   }
-
   isConcatenated(word, isOriginalWord = true) {
     for (let index = 0, currentNode = this.rootNode, nextNode = null; index < word.length; index++, currentNode = nextNode) {
       nextNode = currentNode.childNodes[word[index]]
@@ -34,7 +30,5 @@ class Tree {
     }
     return false
   }
-
 }
-
 module.exports = Tree

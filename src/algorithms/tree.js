@@ -2,13 +2,10 @@ const Tree = require('../models/tree')
 
 const computeConcatenatedWords = (words) => {
   const tree = new Tree()
-
   tree.addWords(words)
-
   let concatenatedWordCount = 0
   let maxConcatLength = 0, secondMaxConcatLength = 0
   let maxLengthConcatWords = [], secondMaxLengthConcatWords = []
-
   for (let i = 0; i < words.length; i++) {
     const word = words[i]
     if (tree.isConcatenated(word)) {
@@ -28,12 +25,7 @@ const computeConcatenatedWords = (words) => {
       }
     }
   }
-
-  return {
-    concatenatedWordCount,
-    maxLengthConcatWords,
-    secondMaxLengthConcatWords
-  }
+  return {concatenatedWordCount, maxLengthConcatWords, secondMaxLengthConcatWords}
 }
 
 module.exports = {
