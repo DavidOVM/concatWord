@@ -24,14 +24,6 @@ the longest concatenated word would be 'ratcatdogcat' with 12 characters. 'hippo
 
 ## Solution
 
-- Latest node.js and npm required
-
-- Clone repo and run `npm start`. 
-
-- File called `words.txt` is required in /src
-
-- Average Execution Time for 173k words: `500ms` 
-
 #### How does it work?
 
 Words are added to an ad-hoc tree, each tree node will be one character and will have a flag indicating if it's an end of word node.
@@ -58,3 +50,25 @@ You can use `tree.print()` for visibility (it will affect execution time)
 The algorithm will take a word and traverse the tree. First it will find the original word and all the endOfWords within it and then it will recursively check if the different parts of the word are concatenated.
 
 Let's take 'ahead', we would have 'ah' as the only endOfWord within our word, now we remove 'ah' from 'ahead' and apply the same algorithm to it finding 'ead' and returning true. 
+
+## Running solutions
+
+#### JS
+
+- Latest node.js and npm required
+
+- Clone repo and run `npm run start_js`. 
+
+- File called `words.txt` is required in /src
+
+- Average Execution Time for 173k words: `480ms` 
+
+#### PY
+
+- Latest python, node.js and npm required
+
+- Clone repo and run `npm run start_py`. 
+
+- File called `words.txt` is required in /py_src
+
+- Average Execution Time for 173k words: `3.500ms` 
